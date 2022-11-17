@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="./home.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+
+<body>
+    <div class="container ">
+        
+        <header class="flex space-between align-center">
+            <nav class="flex jusctify-center align-center">
+                
+                <a  href="/home/home.html">
+                    <img src="https://img.icons8.com/ios-filled/50/null/cottage--v1.png"/>
+                </a>
+            </nav>
+            <span class="search-container">
+                <button class="btn-circle search-btn ">
+                    <img src="https://img.icons8.com/ios-glyphs/30/null/search--v1.png"/>
+                </button>
+                <input class="search-input" placeholder="what are you searchng for" type="text" name="search-input" id="search-input">
+            </span>
+        </header>
+        <main>
+            <form class="form-container">
+                <input placeholder="title" type="text" name="title" id="title">
+                <input placeholder="describion" type="text" name="describion" id="describion">    
+                 <button type="button" class="btn ">submit task</button>                    
+                </form>
+                <div class="tasks-container">
+                    <div class="task-container">
+                        <h2 class="finished" >title</h2>
+                        <p class="finished"> Lorem ipsum dolor sit amet.</p>
+                        <span><label for="finished">finished</label><input type="checkbox" name="finished" id="finished"></span>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <script  src="./script.js"></script>
+    </body>
+    </html>

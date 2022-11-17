@@ -4,9 +4,7 @@ class usersController{
         
     }
     static async checkUser(req,res,next){
-        console.log(req.body.email)
         const user=await userModel.findOne({email:req.body.email})
-       console.log(user)
         if(user) 
         return res.status(400).json({data:'email already exists'})
         return next()
@@ -23,11 +21,12 @@ static async getUser(req,res){
     return res.status(200).json(await user.populate('tasksId'))
     
 }
-    static async createUser(req,res){
+    static async createUser(req,res,next){
     const user=await userModel.create({
         ... req.body
        }) 
-       return res.status(201).json(req.token)
+       req.user=user
+       return next()
 
 }
 static async sendToken(req,res){

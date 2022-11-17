@@ -5,13 +5,16 @@ class usersMiddleware{
 
     }
     static async createToken(req,res,next){
-       req.token=await jwt.sign({user:req.user},process.env.TOKEN_KEY,{expiresIn:'1w'})
-           return next()
-     }
+       const token=await jwt.sign({user:req.user},process.env.TOKEN_KEY,{expiresIn:'1w'})
+       return res.status(201).json({token,userId:req.user.id})
+      }
     static async verifyToken(req,res,next){
-      jwt.verify(req.body.token,process.env.TOKEN_KEY,(err,data)=>{
+      const token=req.headers.authorization.split(' ')[1]
+      console.log(token)
+      jwt.verify(token,process.env.TOKEN_KEY,(err,data)=>{
          if(err) res.status(400).json({msg:'token not authorized'})
          req.user=data
+         console.log(req.user)
          return next()
       })
    }

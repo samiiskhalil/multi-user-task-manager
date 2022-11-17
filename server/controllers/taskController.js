@@ -22,6 +22,7 @@ static async deleteTask(req,res){
 }
 static async updateTask(req,res){
     let task=await taskModel.findById(req.body.task.id)
+    console.log(task)
     task.title=req.body.task.title
     task.describtion=req.body.task.describtion
     await  task.save()
