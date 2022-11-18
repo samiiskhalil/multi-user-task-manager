@@ -74,12 +74,27 @@ span{
     display: flex;
     align-items: center;
 }
-.task-container .finished{
+.finished *{
     position: relative;
 }
-.task-container .finished::after{
+.finished h2::after{
 content: '.';
+color: white;
 top: 50%;
+transform: translate(0 -50%);
+left: 0;
+/* width: ; */
+position:absolute;
+background-color: black;
+height: 3px;
+}
+.finished{
+    background-color: red;
+}
+.finished p::after{
+    content: '.';
+    color: white;
+    top: 50%;
 transform: translate(0 -50%);
 left: 0;
 /* width: ; */
