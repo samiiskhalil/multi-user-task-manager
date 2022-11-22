@@ -7,6 +7,7 @@ class taskController{
         try{
             console.log(req.userId)
             const tasks=await taskModel.find({userId:req.userId})
+
             if(!tasks){
               return  res.send('aa')
             }
@@ -15,28 +16,46 @@ class taskController{
            return res.status(400).send(err.message)
         }
     }
+    // static async getUserTasks(req,res){
+    //     try{
+    //         const user=await taskModel.findById()
+    //         res.status(200).json(tasks)
+    //     }
+    //     catch(err){
+    //         req.send(err.message)
+    //     }
+    // }
     static async createTask(req,res){
-        const task=await taskModel.create(req.body.task)
-        console.log('asdda')
+        console.log(req.body,'aaa')
+        const task=await taskModel.create(req.body)
         let user=await userModel.findById(req.userId)
-        console.log(user)
+        // console.log(user)
         await user.tasksId.push(task.id)
         await user.save()
-        console.log(user)
-        return res.status(201).json(task)
+        // console.log(user)
+        return res.status(201).json({finishedFlage:task.finishedFlage,id:task.id,userId:task.userId,describtion:task.describtion,title:task.title})
     }
-static async deleteTask(req,res){
-    await taskModel.findByIdAndDelete(req.body.task.id)
-    return res.status(200).json({msg:'deleted'})
+static async deleteTask(req,res){try{
+    console.log(req.userId)
+    await taskModel.findByIdAndDelete(req.body.id)
+    const tasks=await taskModel.find({userId:req.userId})
+    return res.status(200).json(tasks)}
+    catch(err){
+        res.send(err.message)
+    }
 }
 static async updateTask(req,res){
     try{
-    let task=await taskModel.findById('637403747f4a30b9c932d4a9')
-    task.title=req.body.task.title
-    task.describtion=req.body.task.describtion
-    task.finishedFlage=req.body.task.finishedFlage
+        // console.log(req.body)
+        let task=await taskModel.findById(req.body._id)
+        console.log(task)
+        
+        task.title=req.body.title
+        task.describtion=req.body.describtion
+    task.finishedFlage=req.body.finishedFlage
     await  task.save()
-   return res.status(201).json(task)}
+    console.log('a')
+   return res.status(201).json({finishedFlage:task.finishedFlage,id:task.id,userId:task.userId,describtion:task.describtion,title:task.describtion})}
    catch(err){
     res.status(400).send(err.message)
    }

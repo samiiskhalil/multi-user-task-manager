@@ -29,8 +29,10 @@ static async getUser(req,res){
     // console.log(req.params)
     try{
     const user=await userModel.findById(req.params.id)
-    console.log(user)
-    return res.status(200).json(await user.populate('tasksId'))
+    const userTasks=await user.populate('tasksId')
+    console.log(userTasks.tasksId)
+    // res.send('a')
+    return res.status(200).json(userTasks.tasksId)
     }
     catch(err){
         console.log(err)

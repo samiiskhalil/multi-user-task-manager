@@ -1,4 +1,4 @@
-const userMOdel = require('../models/userModel.js');
+const userModel = require('../models/userModel.js');
 const jwt = require('jsonwebtoken')
 class usersMiddleware{
     constructor(){
@@ -28,16 +28,18 @@ class usersMiddleware{
       }
    }
 static async findUser(req,res,next){
-   const email=req.body.email
-   const password=req.body.password
-   const user={}
-   const response=await userModel.findOne({email:email})
-   if(response)
-    user=await userModel.findOne({password:password})
+   console.log('a')
+   let user={}
+   const response=await userModel.findOne({email:req.body.email})
+   if(response){
+    user=await userModel.findOne({password:req.body.password})
     if(user)
-    {req.user=user
+    {
+      req.userId=user._id
+      req.email=user.email
+
       return next()
-   }
+   }}
    return res.status(400).json({msg:'email or password were wrong'})
    }
 }

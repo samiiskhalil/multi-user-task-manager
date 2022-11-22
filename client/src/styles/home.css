@@ -13,7 +13,7 @@ header{
 
 }
 .search-container{
-    position:absolute;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: end;
@@ -88,17 +88,28 @@ position:absolute;
 background-color: black;
 height: 3px;
 }
-.finished{
-    background-color: red;
+.btn{
+    max-width: 100px;
+    width: 40%;
+    background-color: rgba(255, 255, 255,1 );
 }
-.finished p::after{
-    content: '.';
-    color: white;
-    top: 50%;
-transform: translate(0 -50%);
-left: 0;
-/* width: ; */
-position:absolute;
-background-color: black;
-height: 3px;
+ .search-pop-up{
+    width: 100%;
+    position: absolute;
+    max-height: 400px;
+    top: 100px;
+    background-color: lightsteelblue;
+    overflow: scroll;
+}
+.user-container{
+    border-bottom: 1px lightslategray solid;
+    
+}
+.user-container:hover{
+
+        background-color: lightblue;
+}
+.logout-btn{
+position: absolute;
+bottom: 0;
 }
